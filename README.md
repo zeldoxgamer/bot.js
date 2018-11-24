@@ -1,2 +1,1 @@
-# bot.js
-bot
+node starr bot.js
