@@ -1,1 +1,1 @@
-node starr bot.js
+node start bot.js
