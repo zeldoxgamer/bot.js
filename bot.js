@@ -979,4 +979,4 @@ client.on('message', message => {
 
 
 
-client.login("NDYyNjM5NTk4NjE1NjU4NDk2.DhkyQg.L3ftQBBpqgTuAxDnDvpyMmdwZYQ");
+client.login("kcnf3OM4ryCOPqdKrSqXAQRLYLBH5xLy");
