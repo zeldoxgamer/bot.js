@@ -973,4 +973,4 @@ client.on('message', message => {
 
 
 
-client.login("Token-Bot");
+client.login("TOKEN_BOT");
