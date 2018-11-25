@@ -20,17 +20,6 @@ client.on('ready', () => {
 
  let prefix = '+'; 
 
-client.on('message', async message => {
-    let args = message.content.split(" ").slice(1).join(" ");
-    if(message.content.startsWith(prefix + "nickAll")) {
-        if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.reply('No permissions');
-        if(!args) return message.reply('حط الشعار');
-        message.guild.members.forEach(user => {
-           let name = client.users.get(user.id).username;
-           user.setNickname(`${args} | ${name}`);
-        });
-    }
-});
 
 client.on('message', message =>  {
     if (message.content.startsWith(prefix+'js'))
@@ -112,32 +101,6 @@ msg.delete();
 
 
 
-
-client.on('message', message => {
-
-  
-
-if (message.content.startsWith(prefix + 'perm')) {
-
-         if(!message.channel.guild) return;
-
-  var perms = JSON.stringify(message.channel.permissionsFor(message.author).serialize(), null, 4);
-
-         var zPeRms = new Discord.RichEmbed()
-
-         .setColor('RANDOM')
-
-         .setTitle(':tools: Permissions')
-
-         .addField('Your Permissions:',perms)
-
-                  message.channel.send({embed:zPeRms});
-
-
-
-    }
-
-});
 
 
 
@@ -231,64 +194,6 @@ client.on("message", message => {
 
 
 
- 
-
-
-
-client.on('message', message => {
-
-    if (message.content.startsWith(prefix + "invs")) {
-
-     if(!message.channel.guild) return;
-
-if (message.author.bot) return;
-
-        message.channel.createInvite({
-
-        thing: true,
-
-        maxUses: 2,
-
-        maxAge: 86400
-
-    }).then(invite =>
-
-      message.author.sendMessage(invite.url)
-
-    )
-
-    const Embed11 = new Discord.RichEmbed()
-
-        .setColor("RANDOM")
-
-        .setDescription("تم ارسالك في الخاص")
-
-   .setFooter("اسم سيررك ",'رابط صوره سيرفرك')
-
-                   .setTimestamp()
-
-				message.channel.send('**تم الارسال في الخاص**');
-
-
-
-
-
-      message.channel.sendEmbed(Embed11).then(message => {message.delete(3000)})
-
-      message.author.sendEmbed(Embed11)
-
-    }
-
-});
-
-
-
-
-
-
-
-
-
 
 
 
@@ -316,11 +221,7 @@ ch = -1
 
 
 
-client.on('ready', () => {
 
-  console.log('Dev bot ! AّLّ_ّKّaّsّeّr.ّ#9156')
-
-});
 
 
 
