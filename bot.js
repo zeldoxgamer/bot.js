@@ -979,4 +979,4 @@ client.on('message', message => {
 
 
 
-client.login("kcnf3OM4ryCOPqdKrSqXAQRLYLBH5xLy");
+client.login("Token-Bot");
