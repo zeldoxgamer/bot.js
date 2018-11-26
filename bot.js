@@ -69,7 +69,100 @@ Room.send(`
 });
 
  
+client.on('message', async (message) => {
 
+  if(message.content.startsWith("#تقديم")) {
+
+    await message.channel.send("** ما لغتك؟**").then(e => {
+
+    let filter = m => m.author.id === message.author.id
+
+    let lan = '';
+
+    let md = '';
+
+    let br = '';
+
+    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 400000, errors: ['time'] })
+
+      .then(collected => {
+
+        lan = collected.first().content
+
+        collected.first().delete()
+
+        e.delete();
+
+        message.channel.send('** ما خبرتك؟**').then(m => {
+
+        let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 400000, errors: ['time'] })
+
+          .then(co => {
+
+            md = co.first().content
+
+            co.first().delete()
+
+            m.delete();
+
+            message.channel.send('**وش الفرق بين const و var**').then(ms => {
+
+            let br = message.channel.awaitMessages(filter, { max: 1, time: 400000, errors: ['time'] })
+
+              .then(col => {
+
+                br = col.first().content
+
+                col.first().delete()
+
+                ms.delete()
+
+                message.channel.send('جاري التقديم ..').then(b => {
+
+                setTimeout(() => {
+
+                  b.edit(`**تم التقديم وسيتم الرد فـ اقرب وقت**`)
+
+                },2000);
+
+                var gg = message.guild.channels.find('name', 'التقديم')
+
+                if(!gg) return;
+
+                if(gg) {
+
+                  gg.send({
+
+                      embed : new Discord.RichEmbed()
+
+                      .setDescription(`** اللغة ❓ : \n ${lan}\nالخبرة 🔗 :\n ${md} \nالفرق بين const,var ❓ :\n ${br} \nتم التقديم بواسطة : <@${message.author.id}> **`)
+
+                      .setFooter(`ام سيرفرك`)
+
+                      .setTimestamp()
+
+                    });
+
+                  }
+
+                })
+
+              })
+
+            })
+
+          })
+
+        })
+
+      })
+
+    })
+
+  }
+
+})
+ 
  
 
    
