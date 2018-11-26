@@ -68,7 +68,7 @@ Room.send(`
 
 });
 
- const prefix = "+";
+
 
 client.on("message", (message) => {
 
