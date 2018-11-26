@@ -20,33 +20,100 @@ client.on('ready', () => {
 
  let prefix = '+'; 
 
+client.on('message',async message => {
 
-client.on('message', message =>  {
-    if (message.content.startsWith(prefix+'js'))
-        {
-            var members = []
-            let code = message.content.split(" ").slice(1).join(" ")
-            let codeinfo = message.content.split(" ").slice(2).join(" ")
-            let role = message.guild.member(message.author).roles.find('name', 'Support');
-            if(!role) return message.reply('**لا تملك الصلاحية للكتابة الكود**')
-            if (!code) return message.reply(`**${message.author},اكتب الكود يلي تبي تحطه**`)
-            if(!codeinfo) return message.reply(`**${message.author},حط مواصفات الكود**`)
-                client.channels.get("461586047415877635").send(`@everyone ~|~ @here
-================
-\`\`\`js
-${code}
-\`\`\`
-=================
-**وصف الكود**:
-${codeinfo}
-**تم النشر بواسطة**:
-${message.author}`)
-                members.push(message.author.id);
-                message.channel.send(`**${message.author},✅لقد تم وضع لكود في روم #codes-js**`)
-            
- 
+ 
+
+let mention = message.mentions.members.first();
+
+ 
+
+let Room = client.channels.get('465568307370786817'); // ايدي الروم
+
+ 
+
+if(message.content.startsWith(prefix + "رفض")) {
+
+ 
+
+if(message.guild.id !== '461567758518452247') return; //ايدي السيرفر
+
+ 
+
+ if (!message.member.hasPermission("MANAGE_ROLES")) return message.reply("**للأسف ليس لديك صلاحية**").then(msg => msg.delete(5000));
+
+ 
+
+ 
+
+if(!mention) return message.reply("منشن شخص");
+
+ 
+
+ 
+
+ 
+
+Room.send(`
+
+**» العضو :** ${mention}
+
+[ ❌ ] :: لقد تم رفض العضو`);
+
+ 
+
 }
-    });
+
+ 
+
+});
+
+ 
+
+ 
+
+   
+
+client.on('message',async message => {
+
+ 
+
+let mention = message.mentions.members.first();
+
+ 
+
+let Room = client.channels.get('465568307370786817'); //ايدي الروم
+
+ 
+
+if(message.content.startsWith(prefix + "قبول")) {
+
+ 
+
+if(message.guild.id !== '461567758518452247') return; // ايدي السيرفر
+
+ 
+
+ if (!message.member.hasPermission("MANAGE_ROLES")) return message.reply("**للأسف ليس لديك صلاحية**").then(msg => msg.delete(5000));
+
+ 
+
+ 
+
+if(!mention) return message.reply("منشن شخص");
+
+ 
+
+ 
+
+
+Room.send(`
+
+**» العضو :** ${mention}
+
+[ ✅ ] :: لقد تم قبول العضو واعطائه رتبة سبورت`);
+ 
+
  
  
 
