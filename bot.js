@@ -70,6 +70,8 @@ Room.send(`
 
 
 
+const prefix = "+";
+
 client.on("message", (message) => {
 
 if (message.content.toLowerCase().startsWith(prefix + `new`)) {
