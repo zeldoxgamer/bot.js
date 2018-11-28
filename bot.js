@@ -46,7 +46,7 @@ client.on("message", message => {
  
 
 
-var fs = require('fs')
+const fs = require('fs');
  const data = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
   let banse = new Set();
   client.on('guildBanAdd', function(guild) {
