@@ -20,16 +20,32 @@ client.on('ready', () => {
 
  let prefix = '+'; 
 
-STEBINnew paste 
 
-Guest User
--
+client.on("message", message => {
+    var prefix = "+";
+ 
+            var args = message.content.substring(prefix.length).split(" ");
+            if (message.content.startsWith(prefix + "clear")) {
+   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('? | **ليس لديك الصلاحيه حتى تمسح الشات**');
+        var msg;
+        msg = parseInt();
+      
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+      message.channel.sendMessage("", {embed: {
+        title: "Done | تم مسح الشات",
+        color: 0x06DF00,
+        description: "تم المسح„ ",
+        footer: {
+          text: "آ©Ghost"
+        }
+      }}).then(msg => {msg.delete(3000)});
+                          }
 
-Untitled
- A GUEST   NOV 18TH, 2018   115   NEVER
+     
+});
+ 
 
-Not a member of Pastebin yet? Sign Up, it unlocks many cool features!
-rawdownloadreport text 3.52 KB
+
 var fs = require('fs')
  const data = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
   let banse = new Set();
