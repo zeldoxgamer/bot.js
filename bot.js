@@ -68,7 +68,7 @@ function forEachObject(obj, func) {
 client.on("ready", () => {
     var guild;
     while (!guild)
-        guild = client.guilds.get("ايدي سيرفرك");
+        guild = client.guilds.get("461567758518452247");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.cod
@@ -80,7 +80,7 @@ client.on("ready", () => {
 
 
 client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("ايدي الروم");
+    let channel = member.guild.channels.get("461584042547085313");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
@@ -91,7 +91,7 @@ client.on("guildMemberAdd", (member) => {
     console.log('-');
     var guild;
     while (!guild)
-        guild = client.guilds.get("ايدي سيرفرك ");
+        guild = client.guilds.get("461567758518452247");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
