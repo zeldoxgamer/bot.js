@@ -75,7 +75,7 @@ if (message.content.toLowerCase().startsWith(prefix + `new`)) {
         c.overwritePermissions(role2, {
             SEND_MESSAGES: false,
             READ_MESSAGES: false
-        });
+        })
         c.overwritePermissions(message.author, {
             SEND_MESSAGES: true,
             READ_MESSAGES: true
@@ -109,8 +109,49 @@ if (message.content.toLowerCase().startsWith(prefix + `close`)) {
     })
 
 }
+var dat = JSON.parse("{}");
+function forEachObject(obj, func) {
+    Object.keys(obj).forEach(function (key) { func(key, obj[key]) });
+}
+client.on("ready", () => {
+    var guild;
+    while (!guild)
+        guild = client.guilds.get("ايدي سيرفرك ");
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.cod
+            dat[Inv] = Invite.uses;
+        });
+    });
 });
 
+
+
+client.on("guildMemberAdd", (member) => {
+    let channel = member.guild.channels.get("ايدي الروم");
+    if (!channel) {
+        console.log("!the channel id it's not correct");
+        return;
+    }
+    if (member.id == client.user.id) {
+        return;
+    }
+    console.log('-');
+    var guild;
+    while (!guild)
+        guild = client.guilds.get("ايدي سيرفرك ");
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            if (dat[Inv])
+                if (dat[Inv] < Invite.uses) {
+ channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;         
+ }
+            dat[Inv] = Invite.uses;
+       
+       });
+    });
+});
 
  const data = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
   let banse = new Set();
