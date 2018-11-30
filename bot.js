@@ -1463,7 +1463,7 @@ client.on('message', message => {
         let embed = new Discord.RichEmbed()
         .setAuthor(`『| ${message.author.username} |』`, message.author.avatarURL)      
         .setTitle(`اضغط هنا لدعوه البوت`)
-        .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=462639598615658496&permissions=2084043987&scope=bot`)
+        .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=518167388408250379&permissions=8&scope=bot`)
      message.channel.sendEmbed(embed);
        }
    });
@@ -1549,6 +1549,8 @@ client.on('message', message => {
 
 +kick  →اخراج عضو
 
+
++gstar →للقيفاواي
 
 +autorole →اوتورول
 
