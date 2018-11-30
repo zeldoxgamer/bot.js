@@ -900,7 +900,7 @@ client.on('message', message => {
     if (message.content.startsWith("+invites")) {
       if(!message.member.hasPermission('SEND_MESSAGES')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `SEND_MESSAGES`' )      .then(m => m.delete(5000));
     message.guild.fetchInvites()
-    .then(invites => message.channel.send(` You invited To this Server     ---->   ------>    ------>      =====>      [${invites.find(invite => invite.inviter.id === message.author.id).uses}]       <=====     <-------   <-----   <----    `))
+    .then(invites => message.channel.send(`:scroll:  عدد دعواتك لهدا السيرفر هو[${invites.find(invite => invite.inviter.id === message.author.id).uses}].`))
          
     }
 });
