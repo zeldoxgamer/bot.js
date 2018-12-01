@@ -21,6 +21,88 @@ client.on('ready', () => {
  let prefix = '+'; 
 
 
+
+client.on('message',message =>{
+    var prefix = "+";
+    if(message.content.startsWith(prefix + 'top-invite')) {
+  message.guild.fetchInvites().then(i =>{
+  var invites = [];
+   
+  i.forEach(inv =>{
+    var [invs,i]=[{},null];
+     
+    if(inv.maxUses){
+        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
+    }else{
+        invs[inv.code] =+ inv.uses;
+    }
+        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
+   
+  });
+  var embed = new Discord.RichEmbed()
+  .setColor("#000000")
+  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
+  .setThumbnail("صوره بوتك هنا")
+           message.channel.send({ embed: embed });
+   
+  });
+   
+    }
+  });
+
+
+let ar = JSON.parse(fs.readFileSync(`./Data/AutoRole.json`, `utf8`))
+client.on('guildMemberAdd', member => {
+if(!ar[member.guild.id]) ar[member.guild.id] = {
+onoff: 'Off',
+role: 'Member'
+}
+if(ar[member.guild.id].onoff === 'Off') return;
+member.addRole(member.guild.roles.find(`name`, ar[member.guild.id].role)).catch(console.error)
+})
+client.on('message', message => {
+if(!message.guild) return
+if(!ar[message.guild.id]) ar[message.guild.id] = {
+onoff: 'Off',
+role: 'Member'
+}
+if(message.content.startsWith(prefix + `autorole`)) {
+let perms = message.member.hasPermission(`MANAGE_ROLES`)
+if(!perms) return message.reply(`You don't have permissions, required permission : Manage Roles.`)
+let args = message.content.split(" ").slice(1)
+if(!args.join(" ")) return message.reply(`${prefix}autorle toggle/setrole [ROLE NAME]`)
+let state = args[0]
+if(!state.trim().toLowerCase() == 'toggle' || !state.trim().toLowerCase() == 'setrole') return message.reply(`Please type a right state, ${prefix}modlogs toggle/setrole [ROLE NAME]`)
+if(state.trim().toLowerCase() == 'toggle') {
+if(ar[message.guild.id].onoff === 'Off') return [message.channel.send(`**The Autorole Is __𝐎𝐍__ !**`), ar[message.guild.id].onoff = 'On']
+if(ar[message.guild.id].onoff === 'On') return [message.channel.send(`**The Autorole Is __𝐎𝐅𝐅__ !**`), ar[message.guild.id].onoff = 'Off']
+}
+if(state.trim().toLowerCase() == 'set') {
+let newRole = message.content.split(" ").slice(2).join(" ")
+if(!newRole) return message.reply(`${prefix}autorole setrole [ROLE NAME]`)
+if(!message.guild.roles.find(`name`,newRole)) return message.reply(`I Cant Find This Role.`)
+ar[message.guild.id].role = newRole
+message.channel.send(`**The AutoRole Has Been Changed to ${newRole}.**`)
+}
+  }
+if(message.content === prefix + 'info') {
+let perms = message.member.hasPermission(`MANAGE_GUILD`)
+if(!perms) return message.reply(`You don't have permissions.`)
+var embed = new Discord.RichEmbed()
+.addField(`Autorole : :sparkles:  `, `
+State : __${ar[message.guild.id].onoff}__
+Role : __${ar[message.guild.id].role}__`)
+.setColor(`BLUE`)
+message.channel.send({embed})
+}
+fs.writeFile("./Data/AutoRole.json", JSON.stringify(ar), (err) => {
+if (err) console.error(err)
+});
+})
+
+
+
+
 const ms = require("ms");
   client.on("message", message => {
  if(!message.channel.guild) return;  
@@ -1473,6 +1555,9 @@ client.on('message', message => {
 +invites → عدد الدعوات
 
 
++top-invites → للتوب انفايتس
+
+
 +info-server → معلومات عن السيرفر
 
 
@@ -1538,7 +1623,11 @@ client.on('message', message => {
 
 +gstar →للقيفاواي
 
-+autorole →اوتورول
+
++autorole set → @اوتو رول اكتب الامر وجنبه اسم الرتبة بدون  
+
+
++autorole toggle → لتشغيل الوتو رول
 
 
 +clear → لمسح الشات
