@@ -1107,7 +1107,7 @@ client.on("guildMemberAdd", member => {
 :crown:اسم العضو  ${member}:crown:  
 انت العضو رقم ${member.guild.memberCount} `)
 }).catch(console.error)
-})
+});
 
 
 
